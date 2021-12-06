@@ -8,9 +8,9 @@ Tested linux kernel: `5.12.14`
 
 ```bash
 mkdir -p ~/crux3.6
+cd ~/crux3.6
 git clone git://crux.nu/system/iso.git
-cd iso
-cd ports
+cd iso/ports
 git clone git://crux.nu/ports/core.git
 git clone git://crux.nu/ports/opt.git
 git clone git://crux.nu/ports/xorg.git
