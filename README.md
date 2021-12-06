@@ -30,9 +30,9 @@ cp mbp-crux/linux-5.12.14.config kernel/
 ```bash
 git clone https://github.com/aunali1/linux-mbp-arch.git
 mkdir kernel/mbp-patches
-cp linux-mbp-arch/*.patch
+cp linux-mbp-arch/*.patch kernel/mbp-patches
 # Remove arch stuff
-rm linux-mbp-arch/000*
+rm kernel/mbp-patches/000*
 ```
 
 ## Build Crux
