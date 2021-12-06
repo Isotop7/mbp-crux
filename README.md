@@ -7,7 +7,7 @@ Tested linux kernel: `5.12.14`
 ## Setup Crux repo
 
 ```bash
-mkdir -p ~/crux/3.6
+mkdir -p ~/crux3.6
 git clone git://crux.nu/system/iso.git
 cd iso
 cd ports
