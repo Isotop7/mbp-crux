@@ -1,18 +1,29 @@
 diff --git a/Makefile b/Makefile
-index 36808fa..c7da433 100644
+index 867894d..20cb1df 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -7,8 +7,8 @@ CRUXVERSION       = 3.6
  CUSTOMVERSION     =
  COLLECTIONS       = core opt xorg
  KERNEL_MIRROR     = https://cdn.kernel.org
--KERNEL_VERSION    = 5.10.63
+-KERNEL_VERSION    = 5.10.83
 -KERNEL_PATCHES    =
-+KERNEL_VERSION    = 5.12.14
++KERNEL_VERSION    = 5.15.6
 +KERNEL_PATCHES    = $(shell cd kernel && /bin/ls mbp-patches/*.patch)
  BB_VERSION        = 1.32.0
  MEMTEST_VERSION   = 5.01
  SYSLINUX_VERSION  = 6.03
+@@ -23,8 +23,8 @@ SRCISO_ROOT_DIR   = $(PWD)/tmp/srciso_root
+ ISO_FILENAME      = $(PWD)/crux-$(CRUXVERSION)$(CUSTOMVERSION).iso
+ SRCISO_FILENAME   = $(PWD)/crux-$(CRUXVERSION)$(CUSTOMVERSION)-source.iso
+ ISO_PACKAGES      = filesystem bash dash coreutils bzip2 e2fsprogs jfsutils \
+-                    xfsprogs liburcu reiserfsprogs patch findutils glibc grep \
+-                    gzip kbd kmod less gawk ncurses inetutils pkgutils \
++                    xfsprogs reiserfsprogs patch findutils glibc grep gzip kbd \
++                    kmod less gawk ncurses inetutils pkgutils \
+                     procps readline sed shadow sysklogd sysvinit tar \
+                     util-linux vim which dialog nano mdadm pciutils libusb \
+                     sysfsutils usbutils eudev zlib openssl openssh \
 @@ -90,7 +90,7 @@ kernel/linux-$(KERNEL_VERSION).tar.xz:
  kernel/linux-$(KERNEL_VERSION): kernel/linux-$(KERNEL_VERSION).tar.xz
  	tar -C kernel -xJmf kernel/linux-$(KERNEL_VERSION).tar.xz
