@@ -22,7 +22,7 @@ cd ..
 ```bash
 git clone https://github.com/Isotop7/mbp-crux
 patch -p1 < mbp-crux/Makefile.patch
-cp mbp-crux/linux-5.12.14.config kernel/linux-5.12.14.config
+cp mbp-crux/linux-5.12.14.config kernel/
 ```
 
 ## Copy mbp-patches

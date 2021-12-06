@@ -8,7 +8,7 @@ index 867894d..20cb1df 100644
  KERNEL_MIRROR     = https://cdn.kernel.org
 -KERNEL_VERSION    = 5.10.83
 -KERNEL_PATCHES    =
-+KERNEL_VERSION    = 5.15.6
++KERNEL_VERSION    = 5.12.14
 +KERNEL_PATCHES    = $(shell cd kernel && /bin/ls mbp-patches/*.patch)
  BB_VERSION        = 1.32.0
  MEMTEST_VERSION   = 5.01
