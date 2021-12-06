@@ -42,3 +42,7 @@ make kernel
 make bootstrap
 make iso
 ```
+
+## Credits
+
+All credits go to aunali1 for his [awesome work](https://github.com/aunali1/linux-mbp-arch).
