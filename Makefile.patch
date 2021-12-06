@@ -1,0 +1,24 @@
+diff --git a/Makefile b/Makefile
+index 36808fa..c7da433 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,8 +7,8 @@ CRUXVERSION       = 3.6
+ CUSTOMVERSION     =
+ COLLECTIONS       = core opt xorg
+ KERNEL_MIRROR     = https://cdn.kernel.org
+-KERNEL_VERSION    = 5.10.63
+-KERNEL_PATCHES    =
++KERNEL_VERSION    = 5.12.14
++KERNEL_PATCHES    = $(shell cd kernel && /bin/ls mbp-patches/*.patch)
+ BB_VERSION        = 1.32.0
+ MEMTEST_VERSION   = 5.01
+ SYSLINUX_VERSION  = 6.03
+@@ -90,7 +90,7 @@ kernel/linux-$(KERNEL_VERSION).tar.xz:
+ kernel/linux-$(KERNEL_VERSION): kernel/linux-$(KERNEL_VERSION).tar.xz
+ 	tar -C kernel -xJmf kernel/linux-$(KERNEL_VERSION).tar.xz
+ 	for FILE in $(KERNEL_PATCHES); do \
+-		(cd kernel/linux-$(KERNEL_VERSION) && patch -p1 -i ../$$FILE;) \
++		(cd kernel/linux-$(KERNEL_VERSION) && patch -p1 <../$$FILE;) \
+ 	done
+ 	sed -i -e 's,\($$(Q)echo "$$(KERNELVERSION)\)$$$$($$(CONFIG_SHELL).*" >,\1" >,' kernel/linux-$(KERNEL_VERSION)/Makefile
+ 
