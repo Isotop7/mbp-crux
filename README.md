@@ -2,7 +2,8 @@
 
 This repo contains patches for the Crux Makefile in order to create a custom ISO for my MacBook Pro 15,2.
 
-Tested linux kernel: `5.12.14`
+Tested linux kernel: ~~`5.12.14`~~
+**Note**: This is still work in progress and hasn't been tested on any real hardware.
 
 ## Setup Crux repo
 
