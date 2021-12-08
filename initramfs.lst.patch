@@ -1,0 +1,36 @@
+diff --git a/initramfs/initramfs.lst b/initramfs/initramfs.lst
+index c40e7cd..2321125 100644
+--- a/initramfs/initramfs.lst
++++ b/initramfs/initramfs.lst
+@@ -50,7 +50,6 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/cdrom 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/base 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/hv 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/virtio 755 0 0
+-dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/dax 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/md 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/fs 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/fs/isofs 755 0 0
+@@ -153,7 +152,6 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/atp870u.ko ../kernel/linu
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dc395x.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dc395x.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dmx3191d.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dmx3191d.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dpt_i2o.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dpt_i2o.ko 644 0 0
+-file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/gdth.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/gdth.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hpsa.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hpsa.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hptiop.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hptiop.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hv_storvsc.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hv_storvsc.ko 644 0 0
+@@ -187,7 +185,6 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptsas.ko ../ke
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptscsih.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptscsih.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptspi.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptspi.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hv/hv_vmbus.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hv/hv_vmbus.ko 644 0 0
+-file /lib/modules/#KERNEL_VERSION#/kernel/drivers/dax/dax.ko ../kernel/linux-#KERNEL_VERSION#/drivers/dax/dax.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/md/dm-mod.ko ../kernel/linux-#KERNEL_VERSION#/drivers/md/dm-mod.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/fs/isofs/isofs.ko ../kernel/linux-#KERNEL_VERSION#/fs/isofs/isofs.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/fs/ext2/ext2.ko ../kernel/linux-#KERNEL_VERSION#/fs/ext2/ext2.ko 644 0 0
+@@ -206,7 +203,4 @@ file /lib/modules/#KERNEL_VERSION#/kernel/fs/nls/nls_iso8859-1.ko ../kernel/linu
+ file /lib/modules/#KERNEL_VERSION#/kernel/lib/crc16.ko ../kernel/linux-#KERNEL_VERSION#/lib/crc16.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/lib/crc-itu-t.ko ../kernel/linux-#KERNEL_VERSION#/lib/crc-itu-t.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/lib/libcrc32c.ko ../kernel/linux-#KERNEL_VERSION#/lib/libcrc32c.ko 644 0 0
+-file /lib/modules/#KERNEL_VERSION#/kernel/lib/lzo/lzo_compress.ko ../kernel/linux-#KERNEL_VERSION#/lib/lzo/lzo_compress.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/lib/raid6/raid6_pq.ko ../kernel/linux-#KERNEL_VERSION#/lib/raid6/raid6_pq.ko 644 0 0
+-file /lib/modules/#KERNEL_VERSION#/kernel/lib/zlib_deflate/zlib_deflate.ko ../kernel/linux-#KERNEL_VERSION#/lib/zlib_deflate/zlib_deflate.ko 644 0 0
+-file /lib/modules/#KERNEL_VERSION#/kernel/lib/zstd/zstd_compress.ko ../kernel/linux-#KERNEL_VERSION#/lib/zstd/zstd_compress.ko 644 0 0
