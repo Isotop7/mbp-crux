@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 867894d..20cb1df 100644
+index 867894d..cf1e51c 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -7,8 +7,8 @@ CRUXVERSION       = 3.6
@@ -33,3 +33,14 @@ index 867894d..20cb1df 100644
  	done
  	sed -i -e 's,\($$(Q)echo "$$(KERNELVERSION)\)$$$$($$(CONFIG_SHELL).*" >,\1" >,' kernel/linux-$(KERNEL_VERSION)/Makefile
  
+@@ -227,8 +227,9 @@ all-chroot: check-root
+ 	@tar Jxf kernel/linux-$(KERNEL_VERSION).tar.xz -C $(FAKE_ROOT_DIR)/usr/src/
+ 	@for FILE in $(KERNEL_PATCHES); do \
+ 		cp kernel/$$FILE $(FAKE_ROOT_DIR)/usr/src/linux-$(KERNEL_VERSION)/; \
++		echo "Copied file $$FILE"; \
+ 		(cd $(FAKE_ROOT_DIR)/usr/src/linux-$(KERNEL_VERSION) && \
+-		 patch -p1 -i $$FILE); \
++		 patch -p1 -i $$(basename $$FILE)); \
+ 	 done
+ 	@cp kernel/linux-$(KERNEL_VERSION).config $(FAKE_ROOT_DIR)/usr/src/linux-$(KERNEL_VERSION)/.config
+ 	@echo "Preparing kernel source..."
