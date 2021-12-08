@@ -17,9 +17,9 @@ git clone -b 3.6 git://crux.nu/system/iso.git
 cd iso/ports
 
 # Clone ports
-git clone git://crux.nu/ports/core.git
-git clone git://crux.nu/ports/opt.git
-git clone git://crux.nu/ports/xorg.git
+git clone -b 3.6 git://crux.nu/ports/core.git
+git clone -b 3.6 git://crux.nu/ports/opt.git
+git clone -b 3.6 git://crux.nu/ports/xorg.git
 
 # Move back to ISO dir
 cd ..
