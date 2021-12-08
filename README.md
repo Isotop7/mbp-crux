@@ -24,7 +24,7 @@ make -B packages.all
 prt-get depinst $(cat packages.all)
 ```
 
-## Patch Makefile
+## Patch files
 
 ```bash
 git clone https://github.com/Isotop7/mbp-crux
@@ -33,6 +33,9 @@ patch -p1 < mbp-crux/Makefile.patch
 # Patching pkgmk.conf
 patch -p1 < mbp-crux/pkgmk.patch
 cp mbp-crux/linux-5.12.14.config kernel/
+# Patching initramfs
+patch -p1 < ../mbp-crux/init.patch
+patch -p1 < ../mbp-crux/initramfs.lst.patch
 ```
 
 ## Copy mbp-patches
