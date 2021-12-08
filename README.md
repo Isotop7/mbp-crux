@@ -10,12 +10,18 @@ Tested linux kernel: ~~`5.12.14`~~
 ```bash
 mkdir -p ~/crux3.6
 cd ~/crux3.6
-git clone git://crux.nu/system/iso.git
+git clone -b 3.6 git://crux.nu/system/iso.git
 cd iso/ports
 git clone git://crux.nu/ports/core.git
 git clone git://crux.nu/ports/opt.git
 git clone git://crux.nu/ports/xorg.git
 cd ..
+```
+
+## Install prerequisites
+```bash
+make -B packages.all
+prt-get depinst $(cat packages.all)
 ```
 
 ## Patch Makefile
@@ -50,3 +56,4 @@ make iso
 ## Credits
 
 All credits go to aunali1 for his [awesome work](https://github.com/aunali1/linux-mbp-arch).
+The official ISO build for Crux was used as a template and is described [here](https://crux.nu/Wiki/OfficialISOBuildProcess).
