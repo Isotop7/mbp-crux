@@ -31,7 +31,7 @@ git clone https://github.com/Isotop7/mbp-crux
 # Patching Makefile
 patch -p1 < mbp-crux/Makefile.patch
 # Patching pkgmk.conf
-patch -p1 < mbp-crux/pkgmk.patch
+patch -p1 < mbp-crux/pkgmk.conf.patch
 cp mbp-crux/linux-5.12.14.config kernel/
 # Patching initramfs
 patch -p1 < ../mbp-crux/init.patch
