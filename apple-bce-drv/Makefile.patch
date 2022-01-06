@@ -1,0 +1,32 @@
+diff --git a/Makefile b/Makefile
+index a6a656f..ca840e8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,21 +8,18 @@ MY_CFLAGS += -DWITHOUT_NVME_PATCH
+ ccflags-y += ${MY_CFLAGS}
+ CC += ${MY_CFLAGS}
+ 
+-KVERSION := $(KERNELRELEASE)
+-ifeq ($(origin KERNELRELEASE), undefined)
+-KVERSION := $(shell uname -r)
+-endif
+-
+-KDIR := /lib/modules/$(KVERSION)/build
++KVERSION := "linux-5.12.14"
++KDIR := ../kernel/$(KVERSION)
++CRUXKPATH := ../tmp/rootfs
+ PWD := $(shell pwd)
+ 
+ .PHONY: all
+ 
+ all:
+-	$(MAKE) -C $(KDIR) M=$(PWD) modules
++	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) modules
+ 
+ clean:
+-	$(MAKE) -C $(KDIR) M=$(PWD) clean
++	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) clean
+ 
+ install:
+-	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
++	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) modules_install

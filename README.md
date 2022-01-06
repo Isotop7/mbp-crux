@@ -2,7 +2,7 @@
 
 This repo contains patches for the Crux Makefile in order to create a custom ISO for my MacBook Pro 15,2.
 
-Tested linux kernel: ~~`5.12.14`~~
+Currently tested linux kernel: `5.12.14` (as mbp-arch is using this one)
 - **Note**: This is still work in progress and hasn't been tested on any real hardware.
 
 ## Setup Crux repo
@@ -68,10 +68,33 @@ cp linux-mbp-arch/*.patch kernel/mbp-patches
 rm kernel/mbp-patches/000*
 ```
 
+## Clone and prepare kernel drivers
+
+```bash
+# Clone repo
+git clone -b mbp15 https://github.com/t2linux/apple-ib-drv.git
+
+# Switch to cloned repo and apply patch
+cd apple-ib-drv && patch -p1 < ../mbp-crux/apple-ib-drv/Makefile.patch
+
+# Switch back to base dir
+cd ..
+
+# Clone repo
+git clone -b aur https://github.com/t2linux/apple-bce-drv.git
+
+# Switch to cloned repo and apply patch
+cd apple-bce-drv && patch -p1 < ../mbp-crux/apple-bce-drv/Makefile.patch
+
+# Switch back to base dir
+cd ..
+
+```
+
 ## Build Crux
 
 ```bash
-# Optional, for testing kernel config
+# Create kernel
 make kernel
 
 # Mandatory
