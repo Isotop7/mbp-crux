@@ -41,14 +41,14 @@ prt-get depinst $(cat packages.all)
 git clone https://github.com/Isotop7/mbp-crux
 
 # Patching Makefile
-patch -p1 < mbp-crux/Makefile.patch
+patch -p1 < mbp-crux/iso/Makefile.patch
 
 # Patching pkgmk.conf
-patch -p1 < mbp-crux/pkgmk.conf.patch
+patch -p1 < mbp-crux/iso/pkgmk.conf.patch
 
 # Patching initramfs
-patch -p1 < mbp-crux/init.patch
-patch -p1 < mbp-crux/initramfs.lst.patch
+patch -p1 < mbp-crux/iso/init.patch
+patch -p1 < mbp-crux/iso/initramfs.lst.patch
 
 # Copy kernel config
 cp mbp-crux/linux-5.12.14.config kernel/
