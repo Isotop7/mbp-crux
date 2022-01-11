@@ -1,22 +1,36 @@
 diff --git a/initramfs/init b/initramfs/init
-index 29f56b7..36bd5be 100755
+index 29f56b7..9c97d31 100755
 --- a/initramfs/init
 +++ b/initramfs/init
 @@ -102,7 +102,7 @@ find_and_mount_media() {
-        echo -e " ${BOLD}${BLUE}*${NORM} Populating root filesystem..."
-        mkdir -p /newroot
-        echo -e -n "   ${BOLD}${BLUE}*${NORM} Mounting new root filesystem... "
--       mount -t tmpfs tmpfs /newroot -o size=761m
-+       mount -t tmpfs tmpfs /newroot -o size=978m
-        checkReturn
-        echo -e -n "   ${BOLD}${BLUE}*${NORM} Copying files from rootfs.tar.xz... "
-        tar -xJf ${MEDIAMNT}/${PREFIX}/rootfs.tar.xz -C /newroot
-@@ -200,7 +200,7 @@ then
-                        scsi_transport_sas scsi_transport_spi 3w-9xxx 3w-xxxx 53c700 BusLogic \
-                        NCR53c406a a100u2w aacraid advansys aha152x aha1542 aha1740 aic79xx \
-                        aic7xxx aic94xx arcmsr atp870u dc395x dmx3191d dpt_i2o dtc eata fdomain \
--                       gdth hptiop in2000 initio ipr ips lpfc megaraid megaraid_mbox megaraid_sas \
-+                       hptiop in2000 initio ipr ips lpfc megaraid megaraid_mbox megaraid_sas \
-                        nsp32 pas16 psi240i qla1280 qla2xxx qla4xxx qlogicfas qlogicfas408 seagate \
-                        sim710 stex sym53c416 sym53c8xx t128 u14-34f ultrastor \
-                        wd7000 mptsas mptspi hpsa hv_storvsc virtio_scsi vmw_pvscsi
+ 	echo -e " ${BOLD}${BLUE}*${NORM} Populating root filesystem..."
+ 	mkdir -p /newroot
+ 	echo -e -n "   ${BOLD}${BLUE}*${NORM} Mounting new root filesystem... "
+-	mount -t tmpfs tmpfs /newroot -o size=761m
++	mount -t tmpfs tmpfs /newroot -o size=1002m
+ 	checkReturn
+ 	echo -e -n "   ${BOLD}${BLUE}*${NORM} Copying files from rootfs.tar.xz... "
+ 	tar -xJf ${MEDIAMNT}/${PREFIX}/rootfs.tar.xz -C /newroot
+@@ -265,7 +265,21 @@ then
+ 		echo -n ", "
+ 	}
+ 
+-	MODORDER="fs cdrom ata scsi usb firewire"
++	# Apple
++	load_apple_modules() {
++		echo -e -n "${BOLD}${BLUE}Apple${NORM}"
++		for mod in apple-ibridge apple-bce apple-ib-als apple-ib-tb
++		do
++			if [ ! -z "$DEBUG" ]
++			then
++				echo -n " $mod"
++			fi
++			modprobe $mod
++		done
++		echo -n ", "
++	}
++
++	MODORDER="fs cdrom ata scsi usb firewire apple"
+ 
+ 	for MODS in $MODORDER
+ 	do

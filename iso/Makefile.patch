@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 867894d..cf1e51c 100644
+index 867894d..b868bda 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -7,8 +7,8 @@ CRUXVERSION       = 3.6
@@ -33,7 +33,18 @@ index 867894d..cf1e51c 100644
  	done
  	sed -i -e 's,\($$(Q)echo "$$(KERNELVERSION)\)$$$$($$(CONFIG_SHELL).*" >,\1" >,' kernel/linux-$(KERNEL_VERSION)/Makefile
  
-@@ -227,8 +227,9 @@ all-chroot: check-root
+@@ -99,6 +99,10 @@ kernel/linux-$(KERNEL_VERSION)/arch/x86/boot/bzImage: kernel/linux-$(KERNEL_VERS
+ 	cp -f kernel/linux-$(KERNEL_VERSION).config kernel/linux-$(KERNEL_VERSION)/.config
+ 	make -C kernel/linux-$(KERNEL_VERSION) oldconfig
+ 	make -j$(shell nproc) -C kernel/linux-$(KERNEL_VERSION) all
++	cp -f kernel/linux-$(KERNEL_VERSION)/Module.symvers apple-ib-drv
++	cp -f kernel/linux-$(KERNEL_VERSION)/Module.symvers apple-bce-drv
++	make -C apple-ib-drv all
++	make -C apple-bce-drv all
+ 
+ kernel: kernel/linux-$(KERNEL_VERSION)/arch/x86/boot/bzImage
+ 
+@@ -227,8 +231,9 @@ all-chroot: check-root
  	@tar Jxf kernel/linux-$(KERNEL_VERSION).tar.xz -C $(FAKE_ROOT_DIR)/usr/src/
  	@for FILE in $(KERNEL_PATCHES); do \
  		cp kernel/$$FILE $(FAKE_ROOT_DIR)/usr/src/linux-$(KERNEL_VERSION)/; \
@@ -44,3 +55,21 @@ index 867894d..cf1e51c 100644
  	 done
  	@cp kernel/linux-$(KERNEL_VERSION).config $(FAKE_ROOT_DIR)/usr/src/linux-$(KERNEL_VERSION)/.config
  	@echo "Preparing kernel source..."
+@@ -304,6 +309,9 @@ rootfs: kernel busybox
+ 	@cp kernel/linux-$(KERNEL_VERSION)/System.map $(ROOTFS_DIR)/boot/System.map
+ 	@cp kernel/linux-$(KERNEL_VERSION)/arch/x86/boot/bzImage $(ROOTFS_DIR)/boot/vmlinuz
+ 	@make -C kernel/linux-$(KERNEL_VERSION) INSTALL_MOD_PATH=$(ROOTFS_DIR) modules_install > modules_install.log 2>&1
++	@echo "- Installing Apple MacBook drivers..."
++	@make -C apple-ib-drv install-rootfs > modules_install.log 2>&1
++	@make -C apple-bce-drv install-rootfs > modules_install.log 2>&1
+ 	@echo "- Deleting superfluous files..."
+ 	@cd $(ROOTFS_DIR) && rm -rf var opt home
+ 	@mkdir -p $(ROOTFS_DIR)/var/empty $(ROOTFS_DIR)/var/lib
+@@ -389,7 +397,6 @@ image-base: check-root kernel initramfs rootfs setup.dependencies iso/efiboot.im
+ 	@cp initramfs/initramfs $(IMG_ROOT_DIR)/boot/initramfs
+ 	@echo "- Copying CRUX packages"
+ 	@mkdir -p $(IMG_ROOT_DIR)/crux
+-	@cp doc/handbook/handbook.txt doc/handbook/releasenotes.txt $(IMG_ROOT_DIR)/crux
+ 	@cp iso/setup.dependencies $(IMG_ROOT_DIR)/crux
+ 	@mkdir -p $(IMG_ROOT_DIR)/crux/kernel
+ 	@cp kernel/linux-$(KERNEL_VERSION).tar.xz $(IMG_ROOT_DIR)/crux/kernel
