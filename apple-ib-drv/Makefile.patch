@@ -1,8 +1,8 @@
 diff --git a/Makefile b/Makefile
-index ea40afe..5230c4d 100644
+index ea40afe..026562d 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -2,19 +2,17 @@ obj-m += apple-ibridge.o
+@@ -2,15 +2,14 @@ obj-m += apple-ibridge.o
  obj-m += apple-ib-tb.o
  obj-m += apple-ib-als.o
  
@@ -11,20 +11,22 @@ index ea40afe..5230c4d 100644
 -KVERSION := $(shell uname -r)
 -endif
 -KDIR := /lib/modules/$(KVERSION)/build
-+KVERSION := "linux-5.12.14"
++KVERSION := linux-5.12.14
 +KDIR := ../kernel/$(KVERSION)
-+CRUXKPATH := ../tmp/rootfs
++CRUXKBASEDIR := $(shell dirname $$(pwd))
++CRUXROOTFS := $(CRUXKBASEDIR)/tmp/rootfs
  PWD := $(shell pwd)
  
  all:
 -	$(MAKE) -C $(KDIR) M=$(PWD) modules
-+	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) modules
++	$(MAKE) INSTALL_MOD_PATH=$(CRUXROOTFS) -C $(KDIR) M=$(PWD) modules
  
  clean:
--	$(MAKE) -C $(KDIR) M=$(PWD) clean
-+	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) clean
- 
+ 	$(MAKE) -C $(KDIR) M=$(PWD) clean
+@@ -18,3 +17,6 @@ clean:
  install:
--	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
-+	$(MAKE) INSTALL_MOD_PATH=$(CRUXKPATH) -C $(KDIR) M=$(PWD) modules_install
+ 	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
  
++install-rootfs:
++	$(MAKE) INSTALL_MOD_PATH=$(CRUXROOTFS) -C $(KDIR) M=$(PWD) modules_install
++
