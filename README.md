@@ -1,6 +1,6 @@
 # crux-mbp
 
-This repo contains patches for the Crux Makefile in order to create a custom ISO for my MacBook Pro 15,2.
+This repo contains patches for the Crux Makefile in order to create a custom ISO for my MacBook Pro 15,2. The build process in its current state has to be done from another `Crux` installation but could a vm could be used for this.
 
 Currently tested linux kernel versions: 
 
