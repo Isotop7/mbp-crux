@@ -1,5 +1,5 @@
 diff --git a/initramfs/init b/initramfs/init
-index 29f56b7..9c97d31 100755
+index 29f56b7..f9d72e8 100755
 --- a/initramfs/init
 +++ b/initramfs/init
 @@ -102,7 +102,7 @@ find_and_mount_media() {
@@ -11,7 +11,15 @@ index 29f56b7..9c97d31 100755
  	checkReturn
  	echo -e -n "   ${BOLD}${BLUE}*${NORM} Copying files from rootfs.tar.xz... "
  	tar -xJf ${MEDIAMNT}/${PREFIX}/rootfs.tar.xz -C /newroot
-@@ -265,7 +265,21 @@ then
+@@ -123,6 +123,7 @@ find_and_mount_media() {
+ # main script
+ echo ""
+ echo -e "${BOLD}CRUX 3.6 - ${BLUE}https://crux.nu/${NORM}"
++echo -e "${BOLD}crux-mbp - ${BLUE}https://github.com/Isotop7/mbp-crux${NORM}"
+ echo ""
+ 
+ exec >/dev/console </dev/console 2>&1
+@@ -265,7 +266,21 @@ then
  		echo -n ", "
  	}
  
@@ -19,7 +27,7 @@ index 29f56b7..9c97d31 100755
 +	# Apple
 +	load_apple_modules() {
 +		echo -e -n "${BOLD}${BLUE}Apple${NORM}"
-+		for mod in apple-ibridge apple-bce apple-ib-als apple-ib-tb
++		for mod in spi_pxa2xx_platform spi_pxa2xx_pci intel_lpss_pci typec xhci_pci ehci_platform apple-ibridge apple-bce apple-ib-als apple-ib-tb
 +		do
 +			if [ ! -z "$DEBUG" ]
 +			then
