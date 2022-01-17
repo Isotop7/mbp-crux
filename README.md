@@ -12,6 +12,11 @@ Currently tested linux kernel versions:
 
 The created `initramfs` on the iso is bootable, keyboard and USB type C works. The installation also sees the GPT partitioned MacBook disk and installation works. Booting the installed system does not work at the moment because the needed custom kernel modules are not copied to rootfs (check [issue #1](https://github.com/Isotop7/mbp-crux/issues/1))
 
+List of also not working/untested things:
+
+- TouchBar (should work, needs some debugging)
+- Wifi (should work, needs testing)
+
 ## Setup Crux repo
 
 ```bash
