@@ -50,6 +50,9 @@ patch -p1 < mbp-crux/iso/pkgmk.conf.patch
 patch -p1 < mbp-crux/iso/init.patch
 patch -p1 < mbp-crux/iso/initramfs.lst.patch
 
+# Patching busybox
+patch -p1 < mbp-crux/iso/busybox-1.32.0.config.patch
+
 # Copy kernel config
 cp mbp-crux/linux-5.12.14.config kernel/
 ```
