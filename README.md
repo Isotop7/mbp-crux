@@ -128,7 +128,8 @@ make iso
 
 ## Installation
 
-- Write generated ISO to usb stick (`/dev/sdX`, path can be obtained with `fdisk -l` or `lsblk`: `dd if=<path to iso> of=/dev/sdX bs=1M; sync`
+- Write generated ISO to usb stick (`/dev/sdX`, path can be obtained with `fdisk -l` or `lsblk`: 
+  - `dd if=<path to iso> of=/dev/sdX bs=1M; sync`
 - Boot MacBook with `option`-key to USB stick or via `refind`
 
 ## Credits
