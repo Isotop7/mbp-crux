@@ -1,8 +1,32 @@
 diff --git a/initramfs/initramfs.lst b/initramfs/initramfs.lst
-index c40e7cd..6d86e6a 100644
+index c40e7cd..b86a69d 100644
 --- a/initramfs/initramfs.lst
 +++ b/initramfs/initramfs.lst
-@@ -50,7 +50,6 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/cdrom 755 0 0
+@@ -24,6 +24,7 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/ata 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/usbhid 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/class 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/core 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host 755 0 0
+@@ -32,6 +33,7 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/misc 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/mon 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/serial 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/storage 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/typec 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/firewire 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/aacraid 755 0 0
+@@ -44,13 +46,14 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/megaraid 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/qla2xxx 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/qla4xxx 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/sym53c8xx_2 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/spi 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/mfd 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/message 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion 755 0 0
+ dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/cdrom 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/base 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/hv 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/virtio 755 0 0
@@ -10,16 +34,44 @@ index c40e7cd..6d86e6a 100644
  dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/md 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/fs 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/fs/isofs 755 0 0
-@@ -68,6 +67,8 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/lib/lzo 755 0 0
+@@ -68,6 +71,12 @@ dir /lib/modules/#KERNEL_VERSION#/kernel/lib/lzo 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/lib/raid6 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/lib/zlib_deflate 755 0 0
  dir /lib/modules/#KERNEL_VERSION#/kernel/lib/zstd 755 0 0
 +# extra kernel modules
 +dir /lib/modules/#KERNEL_VERSION#/extra 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/sound 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/sound/core 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/iio 755 0 0
++dir /lib/modules/#KERNEL_VERSION#/kernel/drivers/iio/buffer 755 0 0
  
  # modules.dep
  file /lib/modules/#KERNEL_VERSION#/modules.dep ../tmp/rootfs/lib/modules/#KERNEL_VERSION#/modules.dep 644 0 0
-@@ -153,7 +154,6 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/atp870u.ko ../kernel/linu
+@@ -78,12 +87,23 @@ file /lib/modules/#KERNEL_VERSION#/kernel/crypto/xor.ko ../kernel/linux-#KERNEL_
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/cdrom/cdrom.ko ../kernel/linux-#KERNEL_VERSION#/drivers/cdrom/cdrom.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/class/cdc-acm.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/class/cdc-acm.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/storage/usb-storage.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/storage/usb-storage.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/typec/typec.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/typec/typec.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host/xhci-pci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/host/xhci-pci.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host/xhci-plat-hcd.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/host/xhci-plat-hcd.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host/xhci-pci-renesas.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/host/xhci-pci-renesas.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host/ehci-fsl.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/host/ehci-fsl.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/usb/host/ehci-platform.ko ../kernel/linux-#KERNEL_VERSION#/drivers/usb/host/ehci-platform.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/hid.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hid/hid.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/hid-apple.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hid/hid-apple.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/hid-generic.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hid/hid-generic.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/hid-logitech-dj.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hid/hid-logitech-dj.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hid/usbhid/usbhid.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hid/usbhid/usbhid.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/firewire/firewire-core.ko ../kernel/linux-#KERNEL_VERSION#/drivers/firewire/firewire-core.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/firewire/firewire-ohci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/firewire/firewire-ohci.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/firewire/firewire-sbp2.ko ../kernel/linux-#KERNEL_VERSION#/drivers/firewire/firewire-sbp2.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/iio/industrialio.ko ../kernel/linux-#KERNEL_VERSION#/drivers/iio/industrialio.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/iio/buffer/industrialio_triggered_buffer.ko ../kernel/linux-#KERNEL_VERSION#/drivers/iio/buffer/industrialio-triggered-buffer.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/iio/buffer/kfifo_buf.ko ../kernel/linux-#KERNEL_VERSION#/drivers/iio/buffer/kfifo_buf.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/ata/libahci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/ata/libahci.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/ata/ahci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/ata/ahci.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/ata/ata_generic.ko ../kernel/linux-#KERNEL_VERSION#/drivers/ata/ata_generic.ko 644 0 0
+@@ -153,7 +173,6 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/atp870u.ko ../kernel/linu
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dc395x.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dc395x.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dmx3191d.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dmx3191d.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/dpt_i2o.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/dpt_i2o.ko 644 0 0
@@ -27,7 +79,18 @@ index c40e7cd..6d86e6a 100644
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hpsa.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hpsa.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hptiop.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hptiop.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/hv_storvsc.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/hv_storvsc.ko 644 0 0
-@@ -187,7 +187,6 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptsas.ko ../ke
+@@ -181,13 +200,17 @@ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/stex.ko ../kernel/linux-#
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/sym53c8xx_2/sym53c8xx.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/sym53c8xx_2/sym53c8xx.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/virtio_scsi.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/virtio_scsi.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/scsi/vmw_pvscsi.ko ../kernel/linux-#KERNEL_VERSION#/drivers/scsi/vmw_pvscsi.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/spi/spi-pxa2xx-platform.ko ../kernel/linux-#KERNEL_VERSION#/drivers/spi/spi-pxa2xx-platform.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/spi/spi-pxa2xx-pci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/spi/spi-pxa2xx-pci.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/mfd/intel-lpss.ko ../kernel/linux-#KERNEL_VERSION#/drivers/mfd/intel-lpss.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/mfd/intel-lpss-acpi.ko ../kernel/linux-#KERNEL_VERSION#/drivers/mfd/intel-lpss-acpi.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/drivers/mfd/intel-lpss-pci.ko ../kernel/linux-#KERNEL_VERSION#/drivers/mfd/intel-lpss-pci.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptbase.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptbase.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptfc.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptfc.ko 644 0 0
+ file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptsas.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptsas.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptscsih.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptscsih.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/message/fusion/mptspi.ko ../kernel/linux-#KERNEL_VERSION#/drivers/message/fusion/mptspi.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/hv/hv_vmbus.ko ../kernel/linux-#KERNEL_VERSION#/drivers/hv/hv_vmbus.ko 644 0 0
@@ -35,7 +98,7 @@ index c40e7cd..6d86e6a 100644
  file /lib/modules/#KERNEL_VERSION#/kernel/drivers/md/dm-mod.ko ../kernel/linux-#KERNEL_VERSION#/drivers/md/dm-mod.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/fs/isofs/isofs.ko ../kernel/linux-#KERNEL_VERSION#/fs/isofs/isofs.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/fs/ext2/ext2.ko ../kernel/linux-#KERNEL_VERSION#/fs/ext2/ext2.ko 644 0 0
-@@ -206,7 +205,10 @@ file /lib/modules/#KERNEL_VERSION#/kernel/fs/nls/nls_iso8859-1.ko ../kernel/linu
+@@ -206,7 +229,14 @@ file /lib/modules/#KERNEL_VERSION#/kernel/fs/nls/nls_iso8859-1.ko ../kernel/linu
  file /lib/modules/#KERNEL_VERSION#/kernel/lib/crc16.ko ../kernel/linux-#KERNEL_VERSION#/lib/crc16.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/lib/crc-itu-t.ko ../kernel/linux-#KERNEL_VERSION#/lib/crc-itu-t.ko 644 0 0
  file /lib/modules/#KERNEL_VERSION#/kernel/lib/libcrc32c.ko ../kernel/linux-#KERNEL_VERSION#/lib/libcrc32c.ko 644 0 0
@@ -43,6 +106,10 @@ index c40e7cd..6d86e6a 100644
  file /lib/modules/#KERNEL_VERSION#/kernel/lib/raid6/raid6_pq.ko ../kernel/linux-#KERNEL_VERSION#/lib/raid6/raid6_pq.ko 644 0 0
 -file /lib/modules/#KERNEL_VERSION#/kernel/lib/zlib_deflate/zlib_deflate.ko ../kernel/linux-#KERNEL_VERSION#/lib/zlib_deflate/zlib_deflate.ko 644 0 0
 -file /lib/modules/#KERNEL_VERSION#/kernel/lib/zstd/zstd_compress.ko ../kernel/linux-#KERNEL_VERSION#/lib/zstd/zstd_compress.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/sound/soundcore.ko ../kernel/linux-#KERNEL_VERSION#/sound/soundcore.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/sound/core/snd.ko ../kernel/linux-#KERNEL_VERSION#/sound/core/snd.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/sound/core/snd-timer.ko ../kernel/linux-#KERNEL_VERSION#/sound/core/snd-timer.ko 644 0 0
++file /lib/modules/#KERNEL_VERSION#/kernel/sound/core/snd-pcm.ko ../kernel/linux-#KERNEL_VERSION#/sound/core/snd-pcm.ko 644 0 0
 +
 +# extra kernel modules
 +file /lib/modules/#KERNEL_VERSION#/extra/apple-bce.ko ../apple-bce-drv/apple-bce.ko 644 0 0
