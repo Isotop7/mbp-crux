@@ -2,8 +2,13 @@
 
 This repo contains patches for the Crux Makefile in order to create a custom ISO for my MacBook Pro 15,2.
 
-Currently tested linux kernel: `5.12.14` (as mbp-arch is using this one)
-- **Note**: This is still work in progress and hasn't been tested on any real hardware.
+Currently tested linux kernel versions: 
+
+- `5.12.14` (as mbp-arch is using this one)
+
+## Status:
+
+The created `initramfs` on the iso is bootable, keyboard and USB type C works. The installation also sees the GPT partitioned MacBook disk and installation works. Booting the installed system does not work at the moment because the needed custom kernel modules are not copied to rootfs (check [issue #1](https://github.com/Isotop7/mbp-crux/issues/1))
 
 ## Setup Crux repo
 
@@ -108,7 +113,23 @@ make bootstrap
 make iso
 ```
 
+
+## Prepare MacBook
+
+- Install [refind](https://www.rodsbooks.com/refind/) which is used for booting later on
+- Create a free disk partition on your MacBook disk
+
+## Installation
+
+- Write generated ISO to usb stick (`/dev/sdX`, path can be obtained with `fdisk -l` or `lsblk`: `dd if=<path to iso> of=/dev/sdX bs=1M; sync`
+- Boot MacBook with `option`-key to USB stick or via `refind`
+
 ## Credits
 
 All credits go to aunali1 for his [awesome work](https://github.com/aunali1/linux-mbp-arch).
+
+There is also a wiki for the community porting efforts at [t2linux](https://wiki.t2linux.org/).
+
 The official ISO build for Crux was used as a template and is described [here](https://crux.nu/Wiki/OfficialISOBuildProcess).
+
+You can find the `refind` bootloader [here](https://www.rodsbooks.com/refind/).
